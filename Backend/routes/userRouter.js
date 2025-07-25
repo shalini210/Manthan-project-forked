@@ -12,8 +12,8 @@ const storage = multer.diskStorage({
         cb(null, path.join(__dirname, '../uploads'));
     },
     filename: (req, file, cb) => {
-         const u = Date.now() + '-' + Math.round(Math.random() * 1E9)
-        cb(null,u+ file.originalname);
+        const u = Date.now() + '-' + Math.round(Math.random() * 1E9)
+        cb(null, u + file.originalname);
         // console.log(file)
     }
 });
@@ -56,18 +56,24 @@ router.post("/loginUser", async (req, res) => {
     res.send(data)
 })
 
-router.post("/setprofile", upload.single('userimg'),async(req,res)=>
-{
-    // console.log(req.file)
-    let path = "/uploads/"+req.file.filename
-    let userdata = {profilepic:path,education:req.body.education,name:req.body.name}
-    let data = await userController.setProfile({email:req.body.email},{$set:userdata})
+router.post("/setprofile", upload.single('userimg'), async (req, res) => {
+    let path = "/uploads/" + req.file.filename
+
+    let userdata = {
+        profilepic: path,
+        education: req.body.education,
+        name: req.body.name,
+        facebook: req.body.facebook,
+        instagram: req.body.instagram,
+        twitter: req.body.twitter,
+        youtube: req.body.youtube,
+        website: req.body.website
+    }
+
+    let data = await userController.setProfile({ email: req.body.email }, { $set: userdata })
     res.send(data)
-
-    // console.log(path)
-
-
 })
+
 
 
 router.put("/changepwd", async (req, res) => {

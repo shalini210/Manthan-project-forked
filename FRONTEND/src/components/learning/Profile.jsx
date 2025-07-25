@@ -31,71 +31,74 @@ export default function Profile() {
 
         await axios.post(API_URL + '/user/setprofile', data, { headers: { "Content-Type": "multipart/form-data" } })
             .then(() => {
-                setmessage("saved")
+                setmessage("Saved")
             })
             .catch((err) => {
                 console.log(err)
-                setmessage("something wentrong")
+                setmessage("Something went wrong")
             })
     }
 
     return (
         <>
-            <div className='w-100 mx-auto border rounded-2xl flex flex-wrap gap-4 p-3'>
-                <div className='text-center w-full text-5xl uppercase font-bold'>Profile</div>
+            <div className='w-full max-w-2xl mx-auto border rounded-2xl p-6 bg-white shadow-md'>
+                <div className='text-center text-4xl font-bold mb-6 uppercase text-blue-600'>Profile</div>
 
-                <div className='w-full'>
-                    <label>Profile Image</label>
-                    <input type="file" ref={imageref} className='border rounded-2xl w-full px-2 py-1' />
-                </div>
+                <div className='grid grid-cols-1 gap-4'>
 
-                <div className='w-full'>
-                    <label>Name</label>
-                    <input type="text" ref={nameref} placeholder='Name' className='border rounded-2xl w-full px-2 py-1' />
-                </div>
-
-                <div className='w-full'>
-                    <label>Education</label>
-                    <input type="text" ref={educationref} placeholder='Education' className='border rounded-2xl w-full px-2 py-1' />
-                </div>
-
-                <div className='w-full'>
-                    <label>Facebook Link</label>
-                    <input type="text" ref={facebookRef} placeholder='Facebook' className='border rounded-2xl w-full px-2 py-1' />
-                </div>
-
-                <div className='w-full'>
-                    <label>Instagram Link</label>
-                    <input type="text" ref={instagramRef} placeholder='Instagram' className='border rounded-2xl w-full px-2 py-1' />
-                </div>
-
-                <div className='w-full'>
-                    <label>Twitter Link</label>
-                    <input type="text" ref={twitterRef} placeholder='Twitter' className='border rounded-2xl w-full px-2 py-1' />
-                </div>
-
-                <div className='w-full'>
-                    <label>YouTube Link</label>
-                    <input type="text" ref={youtubeRef} placeholder='YouTube' className='border rounded-2xl w-full px-2 py-1' />
-                </div>
-
-                <div className='w-full'>
-                    <label>Website Link</label>
-                    <input type="text" ref={websiteRef} placeholder='Website' className='border rounded-2xl w-full px-2 py-1' />
-                </div>
-
-                <button
-                    onClick={() => fun1()}
-                    className="bg-blue-500 w-full text-white rounded-2xl py-2 hover:bg-blue-600"
-                >
-                    Save
-                </button>
-
-                {message && (
-                    <div className="text-center w-full text-green-600 font-semibold mt-2">
-                        {message}
+                    <div>
+                        <label className='block font-medium mb-1'>🖼️ Profile Image</label>
+                        <input type="file" ref={imageref} className='border rounded-xl w-full px-3 py-2' />
                     </div>
-                )}
+
+                    <div>
+                        <label className='block font-medium mb-1'>👤 Name</label>
+                        <input type="text" ref={nameref} placeholder='Enter your name' className='border rounded-xl w-full px-3 py-2' />
+                    </div>
+
+                    <div>
+                        <label className='block font-medium mb-1'>🎓 Education</label>
+                        <input type="text" ref={educationref} placeholder='Your education' className='border rounded-xl w-full px-3 py-2' />
+                    </div>
+
+                    <div>
+                        <label className='block font-medium mb-1'>📘 Facebook Link</label>
+                        <input type="text" ref={facebookRef} placeholder='https://facebook.com/yourprofile' className='border rounded-xl w-full px-3 py-2' />
+                    </div>
+
+                    <div>
+                        <label className='block font-medium mb-1'>📸 Instagram Link</label>
+                        <input type="text" ref={instagramRef} placeholder='https://instagram.com/yourprofile' className='border rounded-xl w-full px-3 py-2' />
+                    </div>
+
+                    <div>
+                        <label className='block font-medium mb-1'>🐦 Twitter Link</label>
+                        <input type="text" ref={twitterRef} placeholder='https://twitter.com/yourprofile' className='border rounded-xl w-full px-3 py-2' />
+                    </div>
+
+                    <div>
+                        <label className='block font-medium mb-1'>📺 YouTube Link</label>
+                        <input type="text" ref={youtubeRef} placeholder='https://youtube.com/yourchannel' className='border rounded-xl w-full px-3 py-2' />
+                    </div>
+
+                    <div>
+                        <label className='block font-medium mb-1'>🌐 Website</label>
+                        <input type="text" ref={websiteRef} placeholder='https://yourwebsite.com' className='border rounded-xl w-full px-3 py-2' />
+                    </div>
+
+                    <button
+                        onClick={() => fun1()}
+                        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-xl mt-2 transition duration-300"
+                    >
+                        Save
+                    </button>
+
+                    {message && (
+                        <div className="text-center text-green-600 font-semibold mt-2">
+                            {message}
+                        </div>
+                    )}
+                </div>
             </div>
         </>
     )
