@@ -119,6 +119,24 @@ exports.setProfile=async(condition,newdata)=>
     return data
 }
 
+exports.setProfileimage=async(condition,newdata)=>
+{
+    let data = {}
+    // console.log(condition,newdata)
+    await UserModel.findOneAndUpdate(condition,newdata)
+        .then((d) => {
+            console.log("sdf"+d)
+            data.msg = "Image updated"
+            data.data = d
+        })
+        .catch((err) => {
+            data = err;
+            console.log(err)
+        })
+    return data
+}
+
+
 exports.UpdateuserPasswordByEmail = async (condition, newdata) => {
     let data = {};
     await UserModel.findOneAndUpdate(condition,  {$set: newdata })

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ChangePassword from './Changepassword';
 import { useSelector } from 'react-redux';
 import Profile from './Profile';
+import Profileimage from './Profileimage';
 
 export default function Home() {
   const [selectedMenu, setSelectedMenu] = useState('home');
@@ -44,6 +45,13 @@ export default function Home() {
         >
           Profile
         </button>
+        <button
+          onClick={() => setSelectedMenu('profile Image')}
+          className={`block w-full text-left px-4 py-2 rounded hover:bg-gray-700 ${selectedMenu === 'profile Image' ? 'bg-gray-700' : ''
+            }`}
+        >
+          Profile Image
+        </button>
       </nav>
 
       {/* Content Area */}
@@ -67,6 +75,12 @@ export default function Home() {
           <div>
             <h2 className="text-2xl font-semibold text-gray-700 mb-6">Create Profile</h2>
             <Profile />
+          </div>
+        )}
+        {selectedMenu === 'profile Image' && (
+          <div>
+            <h2 className="text-2xl font-semibold text-gray-700 mb-6">Profile Image</h2>
+            <Profileimage />
           </div>
         )}
       </div>
