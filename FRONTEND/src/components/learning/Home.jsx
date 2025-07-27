@@ -3,6 +3,7 @@ import ChangePassword from './Changepassword';
 import { useSelector } from 'react-redux';
 import Profile from './Profile';
 import Profileimage from './Profileimage';
+import AskQuestions from './AskQuestions';
 
 export default function Home() {
   const [selectedMenu, setSelectedMenu] = useState('home');
@@ -57,11 +58,9 @@ export default function Home() {
       {/* Content Area */}
       <div className="flex-1 p-10">
         {selectedMenu === 'home' && (
-          <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">Welcome to Your Dashboard</h1>
-            <p className="text-lg text-gray-600">
-              Use the sidebar to manage your account and settings.
-            </p>
+          <div className="bg-white p-6 shadow-2xl rounded-lg text-left">
+            <h1 className="text-4xl font-bold mb-4">Ask Question?</h1>
+            <AskQuestions />
           </div>
         )}
 
