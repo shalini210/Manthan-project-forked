@@ -59,7 +59,7 @@ export default function Home() {
       <div className="flex-1 p-10">
         {selectedMenu === 'home' && (
           <div className="bg-white p-6 shadow-2xl rounded-lg text-left">
-            <h1 className="text-4xl font-bold mb-4">Ask Question?</h1>
+            <h1 className="text-2xl text-center font-bold mb-4">Ask Question?</h1>
             <AskQuestions />
           </div>
         )}

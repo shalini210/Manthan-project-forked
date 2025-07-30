@@ -13,6 +13,7 @@ export default function Navbar() {
                         <div className="text-xl font-bold">MySite</div>
                         <div className="space-x-6 hidden md:flex">
                             <Link to="/" className="hover:text-gray-200">Home</Link>
+                            <Link to="/allquestions" className="hover:text-gray-200">Questions/Answers</Link>
                             <Link to="/about" className="hover:text-gray-200">About Me</Link>
                             <Link to="/contact" className="hover:text-gray-200">Contact</Link>
                             <Link to="/login" className="hover:text-gray-200">Login</Link>
@@ -26,6 +27,7 @@ export default function Navbar() {
                         <div className="text-xl font-bold">MySite</div>
                         <div className="space-x-6 hidden md:flex">
                             <Link to="/" className="hover:text-gray-200">Home</Link>
+                            <Link to="/allquestions" className="hover:text-gray-200">Questions/Answers</Link>
                             <Link to="/about" className="hover:text-gray-200">About Me</Link>
                             <Link to="/contact" className="hover:text-gray-200">Contact</Link>
                             <Link to="/logout" className="hover:text-gray-200">Logout</Link>
