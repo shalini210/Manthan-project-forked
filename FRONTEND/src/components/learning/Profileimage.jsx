@@ -11,6 +11,7 @@ export default function Profileimage() {
     const imgurl = useSelector((store)=>store.user.userdata.profilepic)
     const [message, setmessage] = useState('')
     let iref = useRef()
+    let dispatch = useDispatch()
     const fun1 = async () => {
         let data = { email: email, userimg: imageref.current.files[0] };
 

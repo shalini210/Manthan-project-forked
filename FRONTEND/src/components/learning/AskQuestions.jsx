@@ -52,7 +52,7 @@ export default function AskQuestions() {
     return (
         <>
             <div>
-                <h1 className='font-bold text-3xl'>Question Title :- </h1>
+                <h1 className='font-bold text-2xl'>Question Title :- </h1>
                 <input
                     type="text"
                     ref={titleref}
@@ -66,13 +66,8 @@ export default function AskQuestions() {
                     ref={quillRef}
                     readOnly={readOnly}
                     defaultValue={new Delta()
-                        .insert('Hello')
-                        .insert('\n', { header: 1 })
-                        .insert('Some ')
-                        .insert('initial', { bold: true })
-                        .insert(' ')
-                        .insert('content', { underline: true })
-                        .insert('\n')}
+                         .insert('\n', { header: 1 })
+                      }
                     onSelectionChange={setRange}
                     onTextChange={setLastChange}
                 />

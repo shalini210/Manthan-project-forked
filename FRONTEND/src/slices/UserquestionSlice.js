@@ -6,9 +6,9 @@ const userquestionSlice = createSlice({
         questions: []
     },
     reducers: {
-        setQuestions: (state, action) => {
-            state.questions = action.payload;
-        },
+        // setQuestions: (state, action) => {
+        //     state.questions = action.payload;
+        // },
         addQuestion: (state, action) => {
             state.questions.push(action.payload);
         }
