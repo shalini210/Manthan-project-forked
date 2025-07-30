@@ -56,11 +56,19 @@ router.post("/loginUser", async (req, res) => {
     res.send(data)
 })
 
-router.post("/setprofile", upload.single('userimg'), async (req, res) => {
+router.post("/setimage", upload.single('userimg'), async (req, res) => {
     let path = "/uploads/" + req.file.filename
 
     let userdata = {
         profilepic: path,
+    }
+
+    let data = await userController.setProfileimage({ email: req.body.email }, { $set: userdata })
+    res.send(data)
+})
+
+router.post("/setprofile", async (req, res) => {
+    let userdata = {
         education: req.body.education,
         name: req.body.name,
         facebook: req.body.facebook,
@@ -72,6 +80,7 @@ router.post("/setprofile", upload.single('userimg'), async (req, res) => {
 
     let data = await userController.setProfile({ email: req.body.email }, { $set: userdata })
     res.send(data)
+
 })
 
 

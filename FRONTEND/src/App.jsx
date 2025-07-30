@@ -18,6 +18,9 @@ import Home from './components/learning/Home'
 import ChangePassword from './components/learning/Changepassword'
 import Forgetpassword from './components/learning/Forgotpassword'
 import Resetpassword from './components/learning/Resetpassword'
+import AskQuestions from './components/learning/AskQuestions'
+import "quill/dist/quill.snow.css"
+             //"quill/dist/quill.core.css"
 function App() {
   let username = "";
 
@@ -28,6 +31,7 @@ function App() {
     <>
       <Navbar></Navbar>
       <Routes>
+        <Route path='/testing' element={<AskQuestions></AskQuestions>}></Route>
         <Route path="/" element={<Home></Home>} />
         <Route path="/about" element={<About></About>} />
         <Route path="/contact" element={<Contact></Contact>} />

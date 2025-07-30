@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import ChangePassword from './Changepassword';
 import { useSelector } from 'react-redux';
 import Profile from './Profile';
+import Profileimage from './Profileimage';
+import AskQuestions from './AskQuestions';
 
 export default function Home() {
   const [selectedMenu, setSelectedMenu] = useState('home');
@@ -44,16 +46,21 @@ export default function Home() {
         >
           Profile
         </button>
+        <button
+          onClick={() => setSelectedMenu('profile Image')}
+          className={`block w-full text-left px-4 py-2 rounded hover:bg-gray-700 ${selectedMenu === 'profile Image' ? 'bg-gray-700' : ''
+            }`}
+        >
+          Profile Image
+        </button>
       </nav>
 
       {/* Content Area */}
       <div className="flex-1 p-10">
         {selectedMenu === 'home' && (
-          <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">Welcome to Your Dashboard</h1>
-            <p className="text-lg text-gray-600">
-              Use the sidebar to manage your account and settings.
-            </p>
+          <div className="bg-white p-6 shadow-2xl rounded-lg text-left">
+            <h1 className="text-4xl font-bold mb-4">Ask Question?</h1>
+            <AskQuestions />
           </div>
         )}
 
@@ -67,6 +74,12 @@ export default function Home() {
           <div>
             <h2 className="text-2xl font-semibold text-gray-700 mb-6">Create Profile</h2>
             <Profile />
+          </div>
+        )}
+        {selectedMenu === 'profile Image' && (
+          <div>
+            <h2 className="text-2xl font-semibold text-gray-700 mb-6">Profile Image</h2>
+            <Profileimage />
           </div>
         )}
       </div>
