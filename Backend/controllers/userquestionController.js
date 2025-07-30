@@ -14,8 +14,9 @@ exports.Showuserquestions = async () => {
 exports.Inseruserquestion = async (o) => {
     let data = {};
     let newQuestion = userquestionModel({
-        email: (o.email).toLowerCase(),
-        question: o.question
+        user_id: o.user_id,
+        question: o.question,
+        questiontitle: o.questiontitle
     })
     await newQuestion.save()
         .then((d) => {
@@ -27,6 +28,20 @@ exports.Inseruserquestion = async (o) => {
         })
     return data
 }
+
+exports.getUserQuestions = async (obj) => {
+    let data = {};
+    await userquestionModel.find({ user_id: obj.user_id })
+        .then((d) => {
+            data.msg = "record send"
+            data.data = d
+        })
+        .catch((err) => {
+            data = err
+        })
+    return data
+}
+
 
 exports.DeleteuserQuestion = async (id) => {
     let data = {};

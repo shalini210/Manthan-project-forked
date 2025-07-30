@@ -1,7 +1,8 @@
 const mongoose = require("mongoose")
 
 const questionSchema = mongoose.Schema({
-    email: String,
+    user_id: String,
+    questiontitle: String,
     question: String
 })
 
