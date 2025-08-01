@@ -1,26 +1,45 @@
 import React, { useEffect, useState } from 'react'
 import { API_URL } from '../../Config'
 import axios from 'axios'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setAllQuestions } from '../../slices/Allquestions'
-export default  function AllQuestions() {
+export default function AllQuestions() {
     let url = API_URL + "/Allquestions"
     let dispatch = useDispatch();
-
+    // const username = useSelector((store) => store.user.userdata.name);
+    // console.log(username)
     let AllQuestions = [];
-    const [AllQuestionsUI,setAllQuestionsUI]=useState("asd")
+    const [AllQuestionsUI, setAllQuestionsUI] = useState("asd")
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
                 let d = await axios.get(url);
                 console.log(d.data.data)
                 AllQuestions = d.data.data
-                let ui = AllQuestions.map((ques,index)=>
-                {
-                return <div key={index}>
-                    {ques.questiontitle}
-                </div>
-                })
+                let ui = AllQuestions.map((ques, index) => {
+                    return (
+                        <div
+                            className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full p-4 mb-3 bg-white shadow-md rounded-2xl hover:bg-gray-50 transition-all duration-200"
+                            key={index}
+                        >
+
+                            <div className="text-sm text-gray-600 mb-1 sm:mb-0 sm:w-1/5 font-medium truncate">
+                                👤 {ques.username || "Unknown"}
+                            </div>
+
+                            <div className="text-base sm:text-lg font-semibold text-gray-800 sm:w-3/5 text-wrap break-words">
+                                ❓ {ques.questiontitle}
+                            </div>
+
+                            <div className="text-sm text-gray-500 mt-2 sm:mt-0 sm:w-1/5 sm:text-end">
+                                🕒 {new Date(ques.postdate).toLocaleString()}
+                            </div>
+                        </div>
+
+                    );
+                });
+
+
                 setAllQuestionsUI(ui)
                 dispatch(setAllQuestions(d.data.data)) // store question list
             } catch (err) {
@@ -28,12 +47,12 @@ export default  function AllQuestions() {
             }
         };
         fetchQuestions();
-},[]);
+    }, []);
 
     return (
         <>
-        <div>AllQuestions</div>
-        {AllQuestionsUI}
+            <div>AllQuestions</div>
+            {AllQuestionsUI}
         </>
     )
 }

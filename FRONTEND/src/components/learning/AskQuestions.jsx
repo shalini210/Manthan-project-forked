@@ -17,6 +17,7 @@ export default function AskQuestions() {
     const titleref = useRef("");
     const [msg, setmsg] = useState('');
     const user_id = useSelector((store) => store.user.userdata._id);
+    const username = useSelector((store) => store.user.userdata.name);
     const dispatch = useDispatch();
 
     const [questionList, setQuestionList] = useState([]);
@@ -36,13 +37,15 @@ export default function AskQuestions() {
     const Showdata = async () => {
         const questiontitle = titleref.current.value;
         const question = quillRef.current.container.innerHTML;
-        const data = { user_id, question, questiontitle };
+        const data = { user_id, username, question, questiontitle };
 
         await axios.post(API_URL + "/userquestion", data)
             .then((d) => {
                 setmsg("Question Asked to users.");
-                dispatch(addQuestion(data)); // ✅ FIXED
-                setQuestionList(prev => [data, ...prev]); // add new question to top
+                // dispatch(addQuestion(data));
+                dispatch(addQuestion(d.data.data));
+                setQuestionList(prev => [d.data.data, ...prev]);
+                // setQuestionList(prev => [data, ...prev]);
             })
             .catch((err) => {
                 console.log(err);
@@ -66,8 +69,8 @@ export default function AskQuestions() {
                     ref={quillRef}
                     readOnly={readOnly}
                     defaultValue={new Delta()
-                         .insert('\n', { header: 1 })
-                      }
+                        .insert('\n', { header: 1 })
+                    }
                     onSelectionChange={setRange}
                     onTextChange={setLastChange}
                 />
@@ -108,8 +111,22 @@ export default function AskQuestions() {
                 <h2 className='text-2xl font-bold mb-2'>Your Questions</h2>
                 {questionList.length > 0 ? (
                     questionList.map((q, index) => (
-                        <div key={index} className='border p-3 my-2 rounded'>
-                            <h3 className='font-semibold text-lg'>{q.questiontitle}</h3>
+                        <div
+                            className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full p-4 mb-3 bg-white shadow-md rounded-2xl hover:bg-gray-50 transition-all duration-200"
+                            key={index}
+                        >
+                            
+                            <div className="text-sm text-gray-600 mb-1 sm:mb-0 sm:w-1/5 font-medium truncate">
+                                👤 {q.username || "Unknown"}
+                            </div>
+
+                            <div className="text-base sm:text-lg font-semibold text-gray-800 sm:w-3/5 text-wrap break-words">
+                                ❓ {q.questiontitle}
+                            </div>
+
+                            <div className="text-sm text-gray-500 mt-2 sm:mt-0 sm:w-1/5 sm:text-end">
+                                🕒 {new Date(q.postdate).toLocaleString()}
+                            </div>
                         </div>
                     ))
                 ) : (

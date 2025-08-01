@@ -68,13 +68,13 @@ export default function UserLogin() {
                         />
                     </div>
                     <div className='grid grid-cols-2  items-center'>
-                    <button
-                        onClick={setlogin}
-                        className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition"
-                    >
-                        Login
-                    </button>
-                    <Link to="/forgotpassword" className='w-full  text-right text-gray-700 hover:text-gray-500'>Forgetpassword?</Link>
+                        <button
+                            onClick={setlogin}
+                            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition"
+                        >
+                            Login
+                        </button>
+                        <Link to="/forgotpassword" className='w-full  text-right text-gray-700 hover:text-gray-500'>Forgetpassword?</Link>
                     </div>
                 </div>
             </div>
