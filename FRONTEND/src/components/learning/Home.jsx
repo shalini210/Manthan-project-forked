@@ -8,7 +8,7 @@ import AskQuestions from './AskQuestions';
 export default function Home() {
   const [selectedMenu, setSelectedMenu] = useState('home');
   const userislogin = useSelector((store) => store.user.userislogin);
-
+  const username = useSelector((store) => store.user.userdata.name);
   if (!userislogin) {
     return (
       <div className="flex items-center justify-center h-screen bg-gray-100">
@@ -33,6 +33,13 @@ export default function Home() {
           Home
         </button>
         <button
+          onClick={() => setSelectedMenu('question')}
+          className={`block w-full text-left px-4 py-2 rounded hover:bg-gray-700 ${selectedMenu === 'question' ? 'bg-gray-700' : ''
+            }`}
+        >
+          Ask Questions
+        </button>
+        <button
           onClick={() => setSelectedMenu('changePassword')}
           className={`block w-full text-left px-4 py-2 rounded hover:bg-gray-700 ${selectedMenu === 'changePassword' ? 'bg-gray-700' : ''
             }`}
@@ -55,9 +62,54 @@ export default function Home() {
         </button>
       </nav>
 
-      {/* Content Area */}
       <div className="flex-1 p-10">
+        {/* {selectedMenu === 'home' && (
+          <div className="bg-white p-6 shadow-2xl rounded-lg text-left">
+            <h2 className="text-xl font-semibold mb-2">Hello, {username} 👋</h2>
+            <p className="text-gray-700">Welcome to your dashboard.</p>
+          </div>
+        )} */}
+
         {selectedMenu === 'home' && (
+          <div className="min-h-screen bg-gradient-to-br from-gray-100 to-white px-6 py-10">
+            <div className="max-w-6xl mx-auto">
+
+              <div className="mb-10">
+                <h1 className="text-4xl font-extrabold text-gray-800">Welcome back, <span className="text-indigo-600">{username}</span> 👋</h1>
+                <p className="text-gray-600 mt-2 text-lg">Here's a quick overview of your dashboard.</p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition-all border-t-4 border-indigo-500">
+                  <h2 className="text-lg font-semibold text-gray-800 mb-1">Your Questions</h2>
+                  <p className="text-sm text-gray-600">View or manage questions you’ve asked.</p>
+                </div>
+
+                <div className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition-all border-t-4 border-green-500">
+                  <h2 className="text-lg font-semibold text-gray-800 mb-1">Ask New Question</h2>
+                  <p className="text-sm text-gray-600">Submit a new question with rich formatting.</p>
+                </div>
+
+                <div className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition-all border-t-4 border-yellow-500">
+                  <h2 className="text-lg font-semibold text-gray-800 mb-1">Notifications</h2>
+                  <p className="text-sm text-gray-600">Get updates on responses or new activity.</p>
+                </div>
+
+                <div className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition-all border-t-4 border-pink-500">
+                  <h2 className="text-lg font-semibold text-gray-800 mb-1">Profile Settings</h2>
+                  <p className="text-sm text-gray-600">Update your info and preferences.</p>
+                </div>
+              </div>
+
+              <div className="mt-12 p-6 bg-white rounded-xl shadow border">
+                <h3 className="text-xl font-bold text-gray-800 mb-2">Tips</h3>
+                <p className="text-gray-600 text-sm">Want to stand out? Ask clear, specific questions and provide all necessary context.</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {selectedMenu === 'question' && (
           <div className="bg-white p-6 shadow-2xl rounded-lg text-left">
             <h1 className="text-2xl text-center font-bold mb-4">Ask Question?</h1>
             <AskQuestions />
@@ -70,18 +122,21 @@ export default function Home() {
             <ChangePassword />
           </div>
         )}
+
         {selectedMenu === 'profile' && (
           <div>
             <h2 className="text-2xl font-semibold text-gray-700 mb-6">Create Profile</h2>
             <Profile />
           </div>
         )}
+
         {selectedMenu === 'profile Image' && (
           <div>
             <h2 className="text-2xl font-semibold text-gray-700 mb-6">Profile Image</h2>
             <Profileimage />
           </div>
         )}
+
       </div>
     </div>
   );
