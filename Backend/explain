@@ -1,13 +1,28 @@
-student 
-model
-
-student ->   verfied : false
-registertion
-->  email -> otp generate -> save otp in db with all the fields of student ->
--> send we sent a otp on your email please verify
-
-->  click on this link and enter otp 
--> localhost:8080/verifyOTP/:emailvalue  MATH
-->-> localhost:8080/verifyOTP/:emailvalue    open with get method
-=> give textbox for otp
-->  now check that entered otp is matched with otp present in db if yes then verify else not 
+db.userquestions.aggregate([
+  {
+    $addFields: {
+      userObjectId: { $toObjectId: "$user_id" } // convert string to ObjectId
+    }
+  },
+  {
+    $lookup: {
+      from: "users",
+      localField: "userObjectId",    // now both are ObjectId
+      foreignField: "_id",
+      as: "user_data"
+    }
+  },
+  {
+    $unwind: "$user_data" // optional: flatten the joined array
+  },
+  {
+    $project: {
+      questiontitle: 1,
+      question: 1,
+       _id:1,
+      user_name: "$user_data.name",
+      email: "$user_data.email",
+      profilepic: "$user_data.profilepic",
+    }
+  }
+])

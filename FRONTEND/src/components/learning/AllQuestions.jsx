@@ -17,8 +17,14 @@ export default  function AllQuestions() {
                 AllQuestions = d.data.data
                 let ui = AllQuestions.map((ques,index)=>
                 {
-                return <div key={index}>
-                    {ques.questiontitle}
+                return <div key={index} className='flex justify-center gap-5 items-center'>
+                  <p>  {ques.questiontitle}
+                    </p>
+                    
+                    <img className='h-10 w-10 rounded-full' src={API_URL+ques.profilepic}/>
+                    <p>    {ques.user_name}
+                    </p>
+
                 </div>
                 })
                 setAllQuestionsUI(ui)
