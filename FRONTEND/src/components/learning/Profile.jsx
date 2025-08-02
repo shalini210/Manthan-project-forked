@@ -63,37 +63,37 @@ export default function Profile() {
                 <div className='grid grid-cols-1 gap-4'>
                     <div>
                         <label className='block font-medium mb-1'>👤 Name</label>
-                        <input type="text" ref={nameref} placeholder='Enter your name' value={username} className={`border rounded-xl w-full px-3 py-2 ${!enable ? 'opacity-60' : ''}`} disabled={!enable} />
+                        <input type="text" ref={nameref} placeholder='Enter your name' defaultValue={username} className={`border rounded-xl w-full px-3 py-2 ${!enable ? 'opacity-60' : ''}`} disabled={!enable} />
                     </div>
 
                     <div>
                         <label className='block font-medium mb-1'>🎓 Education</label>
-                        <input type="text" ref={educationref} placeholder='Your education' value={usereducation} className={`border rounded-xl w-full px-3 py-2 ${!enable ? 'opacity-60' : ''}`} disabled={!enable} />
+                        <input type="text" ref={educationref} placeholder='Your education' defaultValue={usereducation} className={`border rounded-xl w-full px-3 py-2 ${!enable ? 'opacity-60' : ''}`} disabled={!enable} />
                     </div>
 
                     <div>
                         <label className='block font-medium mb-1'>📘 Facebook Link</label>
-                        <input type="text" ref={facebookRef} placeholder='https://facebook.com/yourprofile' value={userfacebook} className={`border rounded-xl w-full px-3 py-2 ${!enable ? 'opacity-60' : ''}`} disabled={!enable} />
+                        <input type="text" ref={facebookRef} placeholder='https://facebook.com/yourprofile' defaultValue={userfacebook} className={`border rounded-xl w-full px-3 py-2 ${!enable ? 'opacity-60' : ''}`} disabled={!enable} />
                     </div>
 
                     <div>
                         <label className='block font-medium mb-1'>📸 Instagram Link</label>
-                        <input type="text" ref={instagramRef} placeholder='https://instagram.com/yourprofile' value={userinstagram} className={`border rounded-xl w-full px-3 py-2 ${!enable ? 'opacity-60' : ''}`} disabled={!enable} />
+                        <input type="text" ref={instagramRef} placeholder='https://instagram.com/yourprofile' defaultValue={userinstagram} className={`border rounded-xl w-full px-3 py-2 ${!enable ? 'opacity-60' : ''}`} disabled={!enable} />
                     </div>
 
                     <div>
                         <label className='block font-medium mb-1'>🐦 Twitter Link</label>
-                        <input type="text" ref={twitterRef} placeholder='https://twitter.com/yourprofile' value={usertwitter} className={`border rounded-xl w-full px-3 py-2 ${!enable ? 'opacity-60' : ''}`} disabled={!enable} />
+                        <input type="text" ref={twitterRef} placeholder='https://twitter.com/yourprofile' defaultValue={usertwitter} className={`border rounded-xl w-full px-3 py-2 ${!enable ? 'opacity-60' : ''}`} disabled={!enable} />
                     </div>
 
                     <div>
                         <label className='block font-medium mb-1'>📺 YouTube Link</label>
-                        <input type="text" ref={youtubeRef} placeholder='https://youtube.com/yourchannel' value={useryoutube} className={`border rounded-xl w-full px-3 py-2 ${!enable ? 'opacity-60' : ''}`} disabled={!enable} />
+                        <input type="text" ref={youtubeRef} placeholder='https://youtube.com/yourchannel' defaultValue={useryoutube} className={`border rounded-xl w-full px-3 py-2 ${!enable ? 'opacity-60' : ''}`} disabled={!enable} />
                     </div>
 
                     <div>
                         <label className='block font-medium mb-1'>🌐 Website</label>
-                        <input type="text" ref={websiteRef} placeholder='https://yourwebsite.com' value={userwebsite} className={`border rounded-xl w-full px-3 py-2 ${!enable ? 'opacity-60' : ''}`} disabled={!enable} />
+                        <input type="text" ref={websiteRef} placeholder='https://yourwebsite.com' defaultValue={userwebsite} className={`border rounded-xl w-full px-3 py-2 ${!enable ? 'opacity-60' : ''}`} disabled={!enable} />
                     </div>
 
                     {!enable ? (

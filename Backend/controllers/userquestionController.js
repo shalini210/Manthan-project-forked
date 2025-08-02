@@ -15,7 +15,6 @@ exports.Inseruserquestion = async (o) => {
     let data = {};
     let newQuestion = userquestionModel({
         user_id: o.user_id,
-        username: o.username,
         question: o.question,
         questiontitle: o.questiontitle
     })

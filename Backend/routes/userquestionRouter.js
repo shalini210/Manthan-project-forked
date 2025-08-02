@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
 })
 
 router.post("/", async (req, res) => {
-    let obj = { user_id: req.body.user_id, username: req.body.username, question: req.body.question, questiontitle: req.body.questiontitle }
+    let obj = { user_id: req.body.user_id, question: req.body.question, questiontitle: req.body.questiontitle }
     let d = await userquestionController.Inseruserquestion(obj)
     res.send(d)
 
