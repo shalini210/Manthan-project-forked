@@ -51,6 +51,18 @@ export default function AskQuestions() {
             });
     };
 
+    const handleDelete = async (id) => {
+        await axios.delete(`${API_URL}/userquestion/${id}`)
+            .then((d) => {
+                console.log("Deleted:", d.data);
+                setQuestionList((s) => s.filter((i) => i._id !== id));
+            })
+            .catch((err) => {
+                console.log("Error deleting question:", err);
+            })
+    }
+
+
     return (
         <>
             <div>
@@ -114,16 +126,27 @@ export default function AskQuestions() {
                             className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full p-4 mb-3 bg-white shadow-md rounded-2xl hover:bg-gray-50 transition-all duration-200"
                             key={index}
                         >
-                            {/* Question Title */}
-                            <div className="text-base sm:text-lg font-semibold text-gray-800 sm:w-2/5 text-wrap break-words mb-2 sm:mb-0">
+
+                            <div className="text-base sm:text-lg font-semibold text-gray-800 sm:w-2/5 text-wrap break-words mb-2 sm:mb-0 uppercase">
                                 ❓ {ques.questiontitle}
                             </div>
 
-                            {/* Post Time */}
+
                             <div className="text-sm text-gray-500 sm:w-1/5 text-end">
                                 🕒 {new Date(ques.postdate).toLocaleString()}
                             </div>
+
+
+                            <div className="sm:w-1/5 text-end mt-2 sm:mt-0">
+                                <button
+                                    onClick={() => handleDelete(ques._id)}
+                                    className="text-red-600 hover:text-red-800 font-medium"
+                                >
+                                    🗑️ Delete
+                                </button>
+                            </div>
                         </div>
+
                     ))
                 ) : (
                     <p>No questions yet.</p>

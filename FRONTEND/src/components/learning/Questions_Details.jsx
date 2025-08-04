@@ -12,13 +12,14 @@ export default function Questions_Details() {
     <div className="min-h-screen bg-[#f1f2f4] px-5 sm:px-10 py-12">
       <div className="max-w-6xl mx-auto">
 
-        {/* Header */}
+
         <header className="mb-10 border-b pb-6 flex justify-between items-start">
           <div>
             <h1 className="text-4xl font-bold text-gray-900">Question Details</h1>
             <p className="text-sm text-gray-500 mt-2">Explore the complete details of the selected question.</p>
           </div>
-          {/* User info (pic + name) */}
+
+
           <div className="flex items-center gap-3">
             <div className="text-right text-sm">
               <p className="text-gray-800 font-medium uppercase">{Questiondetailsui.user_name}</p>
@@ -31,7 +32,7 @@ export default function Questions_Details() {
           </div>
         </header>
 
-        {/* Title + Date Row */}
+
         <section className="border-b pb-8 mb-8">
           <div className="flex justify-between items-center">
             <div>
@@ -49,7 +50,7 @@ export default function Questions_Details() {
           </div>
         </section>
 
-        {/* Question Body */}
+
         <section>
           <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 block">Question Body</label>
           <div className="bg-white border border-gray-300 rounded-lg p-6 shadow-sm text-base text-gray-900 leading-relaxed max-h-[65vh] overflow-y-auto">
