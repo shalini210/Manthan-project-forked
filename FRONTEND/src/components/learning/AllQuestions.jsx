@@ -19,11 +19,10 @@ export default function AllQuestions() {
                 AllQuestions = d.data.data
                 let ui = AllQuestions.map((ques, index) => {
                     return (
-                        <Link to="/Questions_answers">
+                        <Link to={`/Questions_details/${ques._id}`} key={index}>
 
                             <div
                                 className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full p-4 mb-3 bg-white shadow-md rounded-2xl hover:bg-gray-50 transition-all duration-200"
-                                key={index}
                             >
                                 {/* Question Title */}
                                 <div className="text-base sm:text-lg font-semibold text-gray-800 sm:w-2/5 text-wrap break-words mb-2 sm:mb-0">

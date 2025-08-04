@@ -21,7 +21,7 @@ import Resetpassword from './components/learning/Resetpassword'
 import AskQuestions from './components/learning/AskQuestions'
 import "quill/dist/quill.snow.css"
 import AllQuestions from './components/learning/AllQuestions'
-import Questions_Answers from './components/learning/Questions_Answers'
+import Questions_Details from './components/learning/Questions_Details'
 //"quill/dist/quill.core.css"
 function App() {
   let username = "";
@@ -33,7 +33,7 @@ function App() {
     <>
       <Navbar></Navbar>
       <Routes>
-        <Route path='/questions_answers' element={<Questions_Answers></Questions_Answers>} />
+        <Route path='/Questions_details/:id' element={<Questions_Details></Questions_Details>} />
         <Route path='/allquestions' element={<AllQuestions></AllQuestions>} />
         <Route path='/testing' element={<AskQuestions></AskQuestions>} />
         <Route path="/" element={<Home></Home>} />
