@@ -54,7 +54,7 @@ export default function Questions_Details() {
         <section>
           <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 block">Question Body</label>
           <div className="bg-white border border-gray-300 rounded-lg p-6 shadow-sm text-base text-gray-900 leading-relaxed max-h-[65vh] overflow-y-auto">
-            <div dangerouslySetInnerHTML={{ __html: Questiondetailsui.question }} />
+            <div dangerouslySetInnerHTML={{ __html: (Questiondetailsui.question).replace('contenteditable="true"','contenteditable="false"') }} />
           </div>
         </section>
       </div>

@@ -22,7 +22,7 @@ export default function AllQuestions() {
                         <Link to={`/Questions_details/${ques._id}`} key={index}>
 
                             <div
-                                className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full p-4 mb-3 bg-white shadow-md rounded-2xl hover:bg-gray-50 transition-all duration-200"
+                                className="w-3/5 mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center  p-4 mb-3 bg-white shadow-md rounded-2xl hover:bg-gray-50 transition-all duration-200"
                             >
                                 
                                 <div className="text-base sm:text-lg font-semibold text-gray-800 sm:w-2/5 text-wrap break-words mb-2 sm:mb-0 uppercase">

@@ -4,6 +4,7 @@ const questionSchema = mongoose.Schema({
     user_id: String,
     questiontitle: String,
     question: String,
+    category: String,
     postdate: { default: Date.now, type: Date }
 })
 

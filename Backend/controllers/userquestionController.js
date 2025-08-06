@@ -16,7 +16,8 @@ exports.Inseruserquestion = async (o) => {
     let newQuestion = userquestionModel({
         user_id: o.user_id,
         question: o.question,
-        questiontitle: o.questiontitle
+        questiontitle: o.questiontitle,
+        category: o.category
     })
     await newQuestion.save()
         .then((d) => {
@@ -55,3 +56,16 @@ exports.DeleteuserQuestion = async (id) => {
         })
     return data
 }
+
+exports.UpdateUserQuestion = async (id, obj) => {
+    let data = {};
+    await userquestionModel.findByIdAndUpdate(id, obj, { new: true })
+        .then((d) => {
+            data.msg = "record updated"
+            data.data = d
+        })
+        .catch((err) => {
+            data = err
+        });
+    return data;
+};
