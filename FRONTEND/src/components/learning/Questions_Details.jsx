@@ -88,7 +88,6 @@ export default function Questions_Details() {
             </div>
           )}
         </div>
-        {/* Answer Section Ends */}
 
       </div>
     </div>
