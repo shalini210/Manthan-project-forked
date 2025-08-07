@@ -96,7 +96,7 @@ export default function AskQuestions() {
                 />
             </div>
             <div>
-                <select className="p-2 border rounded" ref={categoryref}>
+                <select className="p-2 mb-3 border rounded" ref={categoryref}>
                     <option value="">Select Category</option>
                     <option value="general">General Discussion</option>
                     <option value="technology">Technology</option>
@@ -123,30 +123,10 @@ export default function AskQuestions() {
                     onTextChange={setLastChange}
                 />
 
-                <div className="controls">
-                    <label>
-                        Read Only:{' '}
-                        <input
-                            type="checkbox"
-                            value={readOnly}
-                            onChange={(e) => setReadOnly(e.target.checked)}
-                        />
-                    </label>
-                    <button
-                        className="controls-right"
-                        type="button"
-                        onClick={() => {
-                            alert(quillRef.current?.getLength());
-                        }}
-                    >
-                        Get Content Length
-                    </button>
-                </div>
-
                 <div className='text-center content-center text-xl font-bold uppercase border mt-4 rounded-xl bg-green-500 text-white w-full mx-auto'>
                     {msg}
                 </div>
-                <div className='flex  gap-5'>
+                <div className='flex mt-3  gap-5'>
                     <button
                         onClick={Showdata}
                         className='mt-4 bg-blue-500 text-white px-4 py-2 rounded'

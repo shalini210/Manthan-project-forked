@@ -98,12 +98,12 @@ export default function AllQuestions() {
 
     return (
         <div className="flex min-h-screen bg-gray-100">
-            {/* Sidebar: Category Section */}
+           
             <div className="w-64 bg-white border-r shadow-md">
                 <CategorySection onCategoryClick={fetchQuestionsByCategory} />
             </div>
 
-            {/* Main Content: Questions */}
+
             <div className="flex-1 p-6 min-h-screen bg-gray-50">
                 <h1 className="text-2xl font-bold mb-6 text-gray-800">All Questions</h1>
                 <div className="w-full">{AllQuestionsUI}</div>
