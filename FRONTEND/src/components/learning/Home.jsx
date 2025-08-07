@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import Profile from './Profile';
 import Profileimage from './Profileimage';
 import AskQuestions from './AskQuestions';
-
+import { Link } from 'react-router-dom';
 export default function Home() {
   const [selectedMenu, setSelectedMenu] = useState('home');
   const userislogin = useSelector((store) => store.user.userislogin);
@@ -80,26 +80,38 @@ export default function Home() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition-all border-t-4 border-indigo-500">
-                  <h2 className="text-lg font-semibold text-gray-800 mb-1">Your Questions</h2>
-                  <p className="text-sm text-gray-600">View or manage questions you’ve asked.</p>
-                </div>
 
-                <div className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition-all border-t-4 border-green-500">
-                  <h2 className="text-lg font-semibold text-gray-800 mb-1">Ask New Question</h2>
-                  <p className="text-sm text-gray-600">Submit a new question with rich formatting.</p>
-                </div>
 
-                <div className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition-all border-t-4 border-yellow-500">
-                  <h2 className="text-lg font-semibold text-gray-800 mb-1">Notifications</h2>
-                  <p className="text-sm text-gray-600">Get updates on responses or new activity.</p>
-                </div>
+                <Link to={'/testing'}>
+                  <div className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition-all border-t-4 border-indigo-500">
+                    <h2 className="text-lg font-semibold text-gray-800 mb-1">Your Questions</h2>
+                    <p className="text-sm text-gray-600">View or manage questions you’ve asked.</p>
+                  </div>
+                </Link>
 
-              
-                <div className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition-all border-t-4 border-pink-500">
-                  <h2 className="text-lg font-semibold text-gray-800 mb-1">Profile Settings</h2>
-                  <p className="text-sm text-gray-600">Update your info and preferences.</p>
-                </div>
+
+                <Link to={'/testing'}>
+                  <div className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition-all border-t-4 border-green-500">
+                    <h2 className="text-lg font-semibold text-gray-800 mb-1">Ask New Question</h2>
+                    <p className="text-sm text-gray-600">Submit a new question with rich formatting.</p>
+                  </div>
+                </Link>
+
+
+                <Link to={'/changepassword'}>
+                  <div className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition-all border-t-4 border-yellow-500">
+                    <h2 className="text-lg font-semibold text-gray-800 mb-1">Change Password</h2>
+                    <p className="text-sm text-gray-600">Get updates on responses or new activity.</p>
+                  </div>
+                </Link>
+
+
+                <Link to={'/profilesetting'}>
+                  <div className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition-all border-t-4 border-pink-500">
+                    <h2 className="text-lg font-semibold text-gray-800 mb-1">Profile Settings</h2>
+                    <p className="text-sm text-gray-600">Update your info and preferences.</p>
+                  </div>
+                </Link>
               </div>
 
               <div className="mt-12 p-6 bg-white rounded-xl shadow border">

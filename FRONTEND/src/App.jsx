@@ -23,6 +23,7 @@ import "quill/dist/quill.snow.css"
 import AllQuestions from './components/learning/AllQuestions'
 import Questions_Details from './components/learning/Questions_Details'
 import CategorySection from './components/learning/CategorySection'
+import Profile from './components/learning/Profile'
 //"quill/dist/quill.core.css"
 function App() {
   let username = "";
@@ -47,6 +48,7 @@ function App() {
         <Route path='/changepassword' element={<ChangePassword></ChangePassword>} />
         <Route path='/forgotpassword' element={<Forgetpassword></Forgetpassword>} />
         <Route path='/resetpassword/:id' element={<Resetpassword></Resetpassword>} />
+        <Route path='//profilesetting' element={<Profile></Profile>} />
       </Routes>
       {/* {(userislogin) ? <UserHome></UserHome> : <UserLogin></UserLogin>} */}
     </>
