@@ -95,6 +95,7 @@ export default function Home() {
                   <p className="text-sm text-gray-600">Get updates on responses or new activity.</p>
                 </div>
 
+              
                 <div className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition-all border-t-4 border-pink-500">
                   <h2 className="text-lg font-semibold text-gray-800 mb-1">Profile Settings</h2>
                   <p className="text-sm text-gray-600">Update your info and preferences.</p>

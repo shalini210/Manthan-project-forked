@@ -27,6 +27,23 @@ router.put("/:id", async (req, res) => {
     res.send(d);
 });
 
+router.get("/distinct-categories", async (req, res) => {
+    let d = await userquestionController.getDistinctCategories();
+    res.send(d);
+});
+
+router.get("/by-category/:category", async (req, res) => {
+    let category = req.params.category;
+    let d = await userquestionController.getQuestionsByCategory(category);
+    res.send(d);
+});
+
+router.get("/userquestion/by-category/:category", async (req, res) => {
+    let category = req.params.category
+    let d = await userquestionController.getQuestionsByCategory(category)
+    res.send(d);
+})
+
 
 router.get("/:id", async (req, res) => {
     let obj = { user_id: req.params.id };

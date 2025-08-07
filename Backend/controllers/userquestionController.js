@@ -69,3 +69,30 @@ exports.UpdateUserQuestion = async (id, obj) => {
         });
     return data;
 };
+
+exports.getDistinctCategories = async () => {
+    let result = { msg: "", data: [] };
+    try {
+        const categories = await userquestionModel.distinct("category");
+        result.msg = "category shown";
+        result.data = categories;
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+        result.msg = "error";
+    }
+    return result;
+};
+
+exports.getQuestionsByCategory = async (category) => {
+    let data = {};
+    await userquestionModel.find({ category })
+        .then((d) => {
+            data.msg = "questions found"
+            data.data = d
+        })
+        .catch((err) => {
+            console.error("Error fetching questions by category:", err);
+        })
+    return data;
+};
+

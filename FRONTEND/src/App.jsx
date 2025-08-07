@@ -22,6 +22,7 @@ import AskQuestions from './components/learning/AskQuestions'
 import "quill/dist/quill.snow.css"
 import AllQuestions from './components/learning/AllQuestions'
 import Questions_Details from './components/learning/Questions_Details'
+import CategorySection from './components/learning/CategorySection'
 //"quill/dist/quill.core.css"
 function App() {
   let username = "";
@@ -33,6 +34,7 @@ function App() {
     <>
       <Navbar></Navbar>
       <Routes>
+        <Route path='/distinct-categories' element={<CategorySection></CategorySection>} />
         <Route path='/Questions_details/:id' element={<Questions_Details></Questions_Details>} />
         <Route path='/allquestions' element={<AllQuestions></AllQuestions>} />
         <Route path='/testing' element={<AskQuestions></AskQuestions>} />
