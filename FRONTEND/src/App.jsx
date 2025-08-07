@@ -21,7 +21,10 @@ import Resetpassword from './components/learning/Resetpassword'
 import AskQuestions from './components/learning/AskQuestions'
 import "quill/dist/quill.snow.css"
 import AllQuestions from './components/learning/AllQuestions'
-             //"quill/dist/quill.core.css"
+import Questions_Details from './components/learning/Questions_Details'
+import CategorySection from './components/learning/CategorySection'
+import Profile from './components/learning/Profile'
+//"quill/dist/quill.core.css"
 function App() {
   let username = "";
 
@@ -32,8 +35,10 @@ function App() {
     <>
       <Navbar></Navbar>
       <Routes>
-        <Route path='/allquestions' element={<AllQuestions></AllQuestions>}></Route>
-        <Route path='/testing' element={<AskQuestions></AskQuestions>}></Route>
+        <Route path='/distinct-categories' element={<CategorySection></CategorySection>} />
+        <Route path='/Questions_details/:id' element={<Questions_Details></Questions_Details>} />
+        <Route path='/allquestions' element={<AllQuestions></AllQuestions>} />
+        <Route path='/testing' element={<AskQuestions></AskQuestions>} />
         <Route path="/" element={<Home></Home>} />
         <Route path="/about" element={<About></About>} />
         <Route path="/contact" element={<Contact></Contact>} />
@@ -43,6 +48,7 @@ function App() {
         <Route path='/changepassword' element={<ChangePassword></ChangePassword>} />
         <Route path='/forgotpassword' element={<Forgetpassword></Forgetpassword>} />
         <Route path='/resetpassword/:id' element={<Resetpassword></Resetpassword>} />
+        <Route path='//profilesetting' element={<Profile></Profile>} />
       </Routes>
       {/* {(userislogin) ? <UserHome></UserHome> : <UserLogin></UserLogin>} */}
     </>

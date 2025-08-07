@@ -4,7 +4,8 @@ const questionSchema = mongoose.Schema({
     user_id: String,
     questiontitle: String,
     question: String,
-    // posteddate:D
+    category: String,
+    postdate: { default: Date.now, type: Date }
 })
 
 const userquestionModel = mongoose.model("userquestion", questionSchema)

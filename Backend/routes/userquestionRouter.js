@@ -10,11 +10,40 @@ router.get("/", async (req, res) => {
 })
 
 router.post("/", async (req, res) => {
-    let obj = { user_id: req.body.user_id, question: req.body.question, questiontitle: req.body.questiontitle }
+    let obj = { user_id: req.body.user_id, question: req.body.question, questiontitle: req.body.questiontitle, category: req.body.category }
     let d = await userquestionController.Inseruserquestion(obj)
     res.send(d)
 
 })
+
+router.put("/:id", async (req, res) => {
+    let obj = {
+        question: req.body.question,
+        category: req.body.category,
+    };
+    let id = req.params.id;
+
+    let d = await userquestionController.UpdateUserQuestion(id, obj);
+    res.send(d);
+});
+
+router.get("/distinct-categories", async (req, res) => {
+    let d = await userquestionController.getDistinctCategories();
+    res.send(d);
+});
+
+router.get("/by-category/:category", async (req, res) => {
+    let category = req.params.category;
+    let d = await userquestionController.getQuestionsByCategory(category);
+    res.send(d);
+});
+
+router.get("/userquestion/by-category/:category", async (req, res) => {
+    let category = req.params.category
+    let d = await userquestionController.getQuestionsByCategory(category)
+    res.send(d);
+})
+
 
 router.get("/:id", async (req, res) => {
     let obj = { user_id: req.params.id };

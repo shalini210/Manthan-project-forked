@@ -16,7 +16,8 @@ exports.Inseruserquestion = async (o) => {
     let newQuestion = userquestionModel({
         user_id: o.user_id,
         question: o.question,
-        questiontitle: o.questiontitle
+        questiontitle: o.questiontitle,
+        category: o.category
     })
     await newQuestion.save()
         .then((d) => {
@@ -55,3 +56,43 @@ exports.DeleteuserQuestion = async (id) => {
         })
     return data
 }
+
+exports.UpdateUserQuestion = async (id, obj) => {
+    let data = {};
+    await userquestionModel.findByIdAndUpdate(id, obj, { new: true })
+        .then((d) => {
+            data.msg = "record updated"
+            data.data = d
+        })
+        .catch((err) => {
+            data = err
+        });
+    return data;
+};
+
+exports.getDistinctCategories = async () => {
+    let result = { msg: "", data: [] };
+    try {
+        const categories = await userquestionModel.distinct("category");
+        result.msg = "category shown";
+        result.data = categories;
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+        result.msg = "error";
+    }
+    return result;
+};
+
+exports.getQuestionsByCategory = async (category) => {
+    let data = {};
+    await userquestionModel.find({ category })
+        .then((d) => {
+            data.msg = "questions found"
+            data.data = d
+        })
+        .catch((err) => {
+            console.error("Error fetching questions by category:", err);
+        })
+    return data;
+};
+
