@@ -95,8 +95,9 @@ export default function AskQuestions() {
                     placeholder="Enter your question title"
                 />
             </div>
-            <div>
-                <select className="p-2 mb-3 border rounded" ref={categoryref}>
+            <div className='flex flex-col gap-2'>
+                <h1 className='font-medium text-xl'>Select Category :- </h1>
+                <select className="p-2 mb-3 w-fit border rounded" ref={categoryref}>
                     <option value="">Select Category</option>
                     <option value="general">General Discussion</option>
                     <option value="technology">Technology</option>

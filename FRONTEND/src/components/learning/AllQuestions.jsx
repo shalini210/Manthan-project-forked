@@ -11,7 +11,7 @@ export default function AllQuestions() {
     let dispatch = useDispatch();
     let AllQuestions = [];
     const [AllQuestionsUI, setAllQuestionsUI] = useState("asd")
-
+// comment added
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
