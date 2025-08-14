@@ -16,7 +16,7 @@ export default function AskQuestions() {
     const quillRef = useRef();
     const titleref = useRef("");
     const categoryref = useRef();
-    const [msg, setmsg] = useState('');
+    const [msg, setmsg] = useState(true);
     const user_id = useSelector((store) => store.user.userdata._id);
     const dispatch = useDispatch();
     const [currentEditId, setCurrentEditId] = useState('');
@@ -43,6 +43,7 @@ export default function AskQuestions() {
         await axios.post(API_URL + "/userquestion", data)
             .then((d) => {
                 setmsg("Question Asked to users.");
+                setTimeout(() => setmsg(false), 5000)
                 // dispatch(addQuestion(data));
                 dispatch(addQuestion(d.data.data));
                 setQuestionList(prev => [d.data.data, ...prev]);

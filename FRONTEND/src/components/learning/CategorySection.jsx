@@ -22,7 +22,7 @@ export default function CategorySection({ onCategoryClick }) {
                 {categories.map((cat, index) => (
                     <li
                         key={index}
-                        className="text-blue-600 hover:underline cursor-pointer"
+                        className="text-blue-600 hover:underline cursor-pointer uppercase"
                         onClick={() => onCategoryClick(cat)}
                     >
                         {cat}

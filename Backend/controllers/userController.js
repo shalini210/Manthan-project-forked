@@ -102,13 +102,12 @@ exports.Updateuser = async (id, newdata) => {
         })
     return data
 }
-exports.setProfile=async(condition,newdata)=>
-{
+exports.setProfile = async (condition, newdata) => {
     let data = {}
     // console.log(condition,newdata)
-    await UserModel.findOneAndUpdate(condition,newdata)
+    await UserModel.findOneAndUpdate(condition, newdata, { returnDocument: 'after' })
         .then((d) => {
-            console.log("sdf"+d)
+            console.log("sdf" + d)
             data.msg = "Profile Updated"
             data.data = d
         })
@@ -119,13 +118,13 @@ exports.setProfile=async(condition,newdata)=>
     return data
 }
 
-exports.setProfileimage=async(condition,newdata)=>
-{
+exports.setProfileimage = async (condition, newdata) => {
     let data = {}
+    console.log(newdata)
     // console.log(condition,newdata)
-    await UserModel.findOneAndUpdate(condition,newdata)
+    await UserModel.findOneAndUpdate(condition, newdata, { returnDocument: 'after' })
         .then((d) => {
-            console.log("sdf"+d)
+            console.log("sdf" + d)
             data.msg = "Image updated"
             data.data = d
         })
@@ -139,15 +138,15 @@ exports.setProfileimage=async(condition,newdata)=>
 
 exports.UpdateuserPasswordByEmail = async (condition, newdata) => {
     let data = {};
-    await UserModel.findOneAndUpdate(condition,  {$set: newdata })
+    await UserModel.findOneAndUpdate(condition, { $set: newdata })
         .then((d) => {
-          
+
             data.msg = "record updated"
             data.data = d
         })
         .catch((err) => {
             data = err;
-          
+
         })
     return data
 }
@@ -157,6 +156,19 @@ exports.Showuserbyemail = async (email) => {
     await UserModel.find({ email: email })
         .then((d) => {
             data = d[0]
+        })
+        .catch((err) => {
+            data = err
+        })
+    return data
+}
+
+exports.getUser = async (obj) => {
+    let data = {};
+    await UserModel.findById(obj)
+        .then((d) => {
+            data.msg = "record send"
+            data.data = d
         })
         .catch((err) => {
             data = err

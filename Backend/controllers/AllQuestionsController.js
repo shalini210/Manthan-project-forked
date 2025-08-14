@@ -37,6 +37,7 @@ exports.getall = async () => {
                     question: 1,
                     postdate: 1,
                     category:1,
+                    user_id:"$user_data._id",
                     user_name: "$user_data.name",
                     email: "$user_data.email",
                     profilepic: "$user_data.profilepic"

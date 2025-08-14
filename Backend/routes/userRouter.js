@@ -27,6 +27,12 @@ router.get("/", async (req, res) => {
     res.send(data)
 })
 
+router.get("/:id", async (req, res) => {
+    let obj = req.params.id
+    let user = await userController.getUser(obj);
+    res.send(user);
+});
+
 router.post("/", async (req, res) => {
     let obj = { name: req.body.name, address: req.body.address, email: req.body.email, password: req.body.password, contact: req.body.contact }
     let d = await userController.Inseruser(obj)

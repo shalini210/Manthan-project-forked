@@ -31,6 +31,7 @@ export default function Navbar() {
                             <Link to="/about" className="hover:text-gray-200">About Me</Link>
                             <Link to="/contact" className="hover:text-gray-200">Contact</Link>
                             <Link to="/logout" className="hover:text-gray-200">Logout</Link>
+                            <Link to="/showprofile" className="hover:text-gray-200">Profile</Link>
                         </div>
                     </div>
                 </nav>}

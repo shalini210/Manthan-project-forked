@@ -85,7 +85,41 @@ exports.getDistinctCategories = async () => {
 
 exports.getQuestionsByCategory = async (category) => {
     let data = {};
-    await userquestionModel.find({ category })
+    // await userquestionModel.find({ category })
+
+
+    await userquestionModel.aggregate([
+        { $match: { "category": category } },
+        {
+            $addFields: {
+                userObjectId: { $toObjectId: "$user_id" }
+            }
+        },
+        {
+            $lookup: {
+                from: "users",                // collection name in MongoDB (lowercase plural of model name)
+                localField: "userObjectId",
+                foreignField: "_id",
+                as: "user_data"
+            }
+        },
+        {
+            $unwind: "$user_data"
+        },
+        {
+            $project: {
+                _id: 1,
+                questiontitle: 1,
+                question: 1,
+                postdate: 1,
+                category: 1,
+                user_id: "$user_data._id",
+                user_name: "$user_data.name",
+                email: "$user_data.email",
+                profilepic: "$user_data.profilepic"
+            }
+        }
+    ])
         .then((d) => {
             data.msg = "questions found"
             data.data = d
@@ -94,5 +128,7 @@ exports.getQuestionsByCategory = async (category) => {
             console.error("Error fetching questions by category:", err);
         })
     return data;
+
+
 };
 
