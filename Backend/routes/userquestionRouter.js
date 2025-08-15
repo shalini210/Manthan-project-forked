@@ -28,9 +28,15 @@ router.put("/:id", async (req, res) => {
 });
 
 router.get("/distinct-categories", async (req, res) => {
-    let d = await userquestionController.getDistinctCategories();
-    res.send(d);
+    try {
+        const categories = await userquestionController.getDistinctCategoriesWithCount();
+        res.json({ success: true, data: categories }); // make sure `categories` is array
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, message: "Server Error" });
+    }
 });
+
 
 router.get("/by-category/:category", async (req, res) => {
     let category = req.params.category;

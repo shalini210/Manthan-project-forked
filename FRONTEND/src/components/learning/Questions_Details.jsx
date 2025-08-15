@@ -12,21 +12,23 @@ export default function Questions_Details() {
   const Questiondetailsui = allquestions.find((m) => m._id === id)
   const question_id = Questiondetailsui?._id;
 
-
   const answerRef = useRef();
   const [showAnswerBox, setShowAnswerBox] = useState(false)
   const [showLoginMsg, setShowLoginMsg] = useState(false)
+  const [successMsg, setSuccessMsg] = useState("")
   const [answers, setAnswers] = useState([])
-  useEffect(() => {
-    axios.get(`${API_URL}/useranswer/${question_id}`)
-      .then((d) => {
-        setAnswers(d.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      });
-  }, [question_id]);
 
+  useEffect(() => {
+    if (question_id) {
+      axios.get(`${API_URL}/useranswer/${question_id}`)
+        .then((d) => {
+          setAnswers(d.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        });
+    }
+  }, [question_id]);
 
   const handleAnswerClick = () => {
     if (userislogin) {
@@ -39,12 +41,25 @@ export default function Questions_Details() {
   }
 
   const saveAnswers = async () => {
-    const answer = answerRef.current.value;
+    const answer = answerRef.current.value.trim();
+    if (!answer) return;
+
     let data = { question_id, user_id, answer };
 
     try {
       const res = await axios.post(API_URL + "/useranswer", data);
       console.log("Answer saved:", res.data.data);
+
+      // Refresh answers list
+      setAnswers((prev) => [...prev, res.data.data]);
+
+      // Show success message
+      setSuccessMsg("✅ Answer submitted successfully!");
+      setShowAnswerBox(false);
+      answerRef.current.value = "";
+
+      // Hide success message after 3 seconds
+      setTimeout(() => setSuccessMsg(""), 3000);
     } catch (err) {
       console.error(err);
     }
@@ -55,22 +70,15 @@ export default function Questions_Details() {
       key={ans._id}
       className="bg-white p-5 my-4 rounded-lg border border-gray-200 shadow-sm"
     >
-
       <div className="flex justify-between items-center mb-3 text-xs text-gray-500">
-        <span className="font-semibold uppercase">Posted by :- {ans.user_name}</span>
+        <span className="font-semibold uppercase">Answered by :- {ans.user_name}</span>
         <span className="font-semibold">{new Date(ans.postdate).toLocaleDateString()}</span>
       </div>
-
-
       <div className="bg-gray-50 p-4 rounded-md border border-gray-200">
         <p className="text-gray-800 leading-relaxed">{ans.answer}</p>
       </div>
     </div>
   ));
-
-
-
-
 
   return (
     <div className="min-h-screen bg-[#f1f2f4] px-5 sm:px-10 py-12">
@@ -85,16 +93,13 @@ export default function Questions_Details() {
           <div className="flex items-center gap-2">
             <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider block">Posted by :-</label>
             <div className="flex gap-2 text-right items-center text-sm">
-              <Link
-                to={`/showuserprofile/${Questiondetailsui.user_id}`}
-              >
+              <Link to={`/showuserprofile/${Questiondetailsui.user_id}`}>
                 <img
                   src={API_URL + Questiondetailsui.profilepic}
                   alt="User Profile"
                   className="w-6 h-6 rounded-full object-cover border shadow"
                 />
               </Link>
-
               <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider block">{Questiondetailsui.user_name}</p>
             </div>
           </div>
@@ -119,22 +124,30 @@ export default function Questions_Details() {
 
         <section>
           <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 block">Question Body</label>
-          <div className="bg-black text-white rounded-lg p-6  text-base  leading-relaxed max-h-[65vh] overflow-y-auto">
-            <div dangerouslySetInnerHTML={{ __html: (Questiondetailsui.question).replace('contenteditable="true"', 'contenteditable="false"') }} />
+          <div className="bg-black text-white rounded-lg p-6 text-base leading-relaxed max-h-[65vh] overflow-y-auto">
+            <div dangerouslySetInnerHTML={{
+              __html: (Questiondetailsui.question)
+                .replace('contenteditable="true"', 'contenteditable="false"')
+            }} />
           </div>
         </section>
 
         <div className="mt-10">
-          <button
-            onClick={handleAnswerClick}
-            className={`px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition ${showAnswerBox ? "hidden" : ""}`}
-          >
-            Answer
-          </button>
+          {!showAnswerBox && (
+            <button
+              onClick={handleAnswerClick}
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+            >
+              Answer
+            </button>
+          )}
 
-          {/* Login message */}
           {showLoginMsg && (
             <p className="mt-3 text-red-600 font-medium">Please login before answering.</p>
+          )}
+
+          {successMsg && (
+            <p className="mt-3 text-green-600 font-medium">{successMsg}</p>
           )}
 
           {showAnswerBox && (
@@ -153,7 +166,7 @@ export default function Questions_Details() {
                   Cancel
                 </button>
                 <button
-                  onClick={() => saveAnswers()}
+                  onClick={saveAnswers}
                   className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
                 >
                   Submit

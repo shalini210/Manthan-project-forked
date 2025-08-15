@@ -70,18 +70,13 @@ exports.UpdateUserQuestion = async (id, obj) => {
     return data;
 };
 
-exports.getDistinctCategories = async () => {
-    let result = { msg: "", data: [] };
-    try {
-        const categories = await userquestionModel.distinct("category");
-        result.msg = "category shown";
-        result.data = categories;
-    } catch (error) {
-        console.error("Error fetching categories:", error);
-        result.msg = "error";
-    }
-    return result;
+exports.getDistinctCategoriesWithCount = async () => {
+    return await userquestionModel.aggregate([
+        { $group: { _id: "$category", count: { $sum: 1 } } },
+        { $sort: { _id: 1 } }
+    ]); // this returns [{ _id: "Career", count: 5 }, ...]
 };
+
 
 exports.getQuestionsByCategory = async (category) => {
     let data = {};

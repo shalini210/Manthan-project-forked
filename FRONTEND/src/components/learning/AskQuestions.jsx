@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { API_URL } from '../../Config';
 import { addQuestion } from '../../slices/UserquestionSlice';
+import { Link } from 'react-router-dom';
 
 const Delta = Quill.import('delta');
 
@@ -26,7 +27,7 @@ export default function AskQuestions() {
         const fetchQuestions = async () => {
             try {
                 let res = await axios.get(API_URL + "/userquestion/" + user_id);
-                setQuestionList(res.data.data); // store question list
+                setQuestionList(res.data.data);
             } catch (err) {
                 console.log("Error loading questions", err);
             }
@@ -44,10 +45,8 @@ export default function AskQuestions() {
             .then((d) => {
                 setmsg("Question Asked to users.");
                 setTimeout(() => setmsg(false), 5000)
-                // dispatch(addQuestion(data));
                 dispatch(addQuestion(d.data.data));
                 setQuestionList(prev => [d.data.data, ...prev]);
-                // setQuestionList(prev => [data, ...prev]);
             })
             .catch((err) => {
                 console.log(err);
@@ -61,6 +60,10 @@ export default function AskQuestions() {
         await axios.put(`${API_URL}/userquestion/${id}`, data)
             .then((d) => {
                 console.log("Updated:", d.data);
+                setQuestionList((prev) =>
+                    prev.map((q) => q._id === id ? { ...q, question, category } : q)
+                );
+                resetForm();
             })
             .catch((err) => {
                 console.log("Error updating question:", err);
@@ -85,6 +88,15 @@ export default function AskQuestions() {
         categoryref.current.value = question.category;
         setCurrentEditId(question._id);
     }
+
+    const resetForm = () => {
+        setCurrentEditId("");
+        titleref.current.disabled = false;
+        titleref.current.value = "";
+        quillRef.current.container.innerHTML = "";
+        categoryref.current.value = "";
+    }
+
     return (
         <>
             <div>
@@ -111,7 +123,6 @@ export default function AskQuestions() {
                     <option value="career">Career & Jobs</option>
                     <option value="feedback">Site Feedback</option>
                 </select>
-
             </div>
 
             <div>
@@ -128,19 +139,31 @@ export default function AskQuestions() {
                 <div className='text-center content-center text-xl font-bold uppercase border mt-4 rounded-xl bg-green-500 text-white w-full mx-auto'>
                     {msg}
                 </div>
-                <div className='flex mt-3  gap-5'>
-                    <button
-                        onClick={Showdata}
-                        className='mt-4 bg-blue-500 text-white px-4 py-2 rounded'
-                    >
-                        Submit Question
-                    </button>
-                    <button
-                        onClick={() => UpdateData(currentEditId)}
-                        className='mt-4 bg-emerald-500 text-white px-4 py-2 rounded'
-                    >
-                        Update Question
-                    </button>
+
+                <div className='flex mt-3 gap-5'>
+                    {currentEditId ? (
+                        <>
+                            <button
+                                onClick={() => UpdateData(currentEditId)}
+                                className='mt-4 bg-emerald-500 text-white px-4 py-2 rounded'
+                            >
+                                Update Question
+                            </button>
+                            <button
+                                onClick={resetForm}
+                                className='mt-4 bg-gray-500 text-white px-4 py-2 rounded'
+                            >
+                                Cancel
+                            </button>
+                        </>
+                    ) : (
+                        <button
+                            onClick={Showdata}
+                            className='mt-4 bg-blue-500 text-white px-4 py-2 rounded'
+                        >
+                            Submit Question
+                        </button>
+                    )}
                 </div>
             </div>
 
@@ -153,15 +176,14 @@ export default function AskQuestions() {
                             key={index}
                         >
 
-                            <div className="text-base sm:text-lg font-semibold text-gray-800 sm:w-2/5 text-wrap break-words mb-2 sm:mb-0 uppercase">
+                            <Link
+                                to={`/Questions_details/${ques._id}`} className="text-base sm:text-lg font-semibold text-gray-800 sm:w-2/5 text-wrap break-words mb-2 sm:mb-0 uppercase">
                                 ❓ {ques.questiontitle}
-                            </div>
-
+                            </Link>
 
                             <div className="text-sm text-gray-500 sm:w-1/5 text-end">
                                 🕒 {new Date(ques.postdate).toLocaleString()}
                             </div>
-
 
                             <div className="sm:w-1/5 text-end mt-2 sm:mt-0">
                                 <button
@@ -172,7 +194,6 @@ export default function AskQuestions() {
                                 </button>
                             </div>
 
-
                             <div className="sm:w-1/5 text-end mt-2 sm:mt-0">
                                 <button
                                     onClick={() => handleDelete(ques._id)}
@@ -182,7 +203,6 @@ export default function AskQuestions() {
                                 </button>
                             </div>
                         </div>
-
                     ))
                 ) : (
                     <p>No questions yet.</p>
