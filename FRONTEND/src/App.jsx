@@ -26,6 +26,7 @@ import CategorySection from './components/learning/CategorySection'
 import Profile from './components/learning/Profile'
 import ShowProfile from './components/learning/ShowProfile'
 import Showuserprofile from './components/learning/Showuserprofile'
+import VerifyOTP from './components/learning/VerifyOTP'
 //"quill/dist/quill.core.css"
 function App() {
   let username = "";
@@ -37,6 +38,7 @@ function App() {
     <>
       <Navbar></Navbar>
       <Routes>
+        <Route path='/verify/:id' element={<VerifyOTP />} />
         <Route path='/showuserprofile/:id' element={<Showuserprofile></Showuserprofile>} />
         <Route path='/showprofile' element={<ShowProfile></ShowProfile>} />
         <Route path='/distinct-categories' element={<CategorySection></CategorySection>} />

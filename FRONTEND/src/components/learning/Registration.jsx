@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { API_URL } from '../../Config';
-import axios  from "axios"
+import axios from "axios"
 import { Link } from 'react-router-dom';
 export default function RegistrationForm() {
     const name = useRef();
@@ -10,9 +10,9 @@ export default function RegistrationForm() {
     const confirmPassword = useRef();
     const address = useRef();
     const [error, setError] = useState('');
-    const [msg,setmsg] = useState('');
+    const [msg, setmsg] = useState('');
 
-    const handleSubmit =async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const checkpassword = password.current.value;
         const checkconfirmPassword = confirmPassword.current.value;
@@ -21,33 +21,38 @@ export default function RegistrationForm() {
             setError("Passwords do not match!");
         } else {
             setError("registration successfull!")
-            let user = 
-            { name: name.current.value,
-                 address: address.current.value,
-                  email: email.current.value, 
-                  password: password.current.value,
-                   contact:contact.current.value }
-                   console.log(user)
-                   
-//                    axios({
-//   method: "post",
-//   url: "myurl",
-//   data: formData,
-//   headers: {
-//       'Content-Type':  `multipart/form-data`,
-// })
+            let user =
+            {
+                name: name.current.value,
+                address: address.current.value,
+                email: email.current.value,
+                password: password.current.value,
+                contact: contact.current.value
+            }
+            console.log(user)
 
-           await  axios.post(API_URL+"/user",user)
-            .then((d)=>
-            {
-           
-                setError(<Link to="/login" className="hover:text-gray-200">{d.data.msg } Click here to login</Link>  )
-            
-            })
-            .catch((err)=>
-            {
-                console.log(err)
-            })
+            //                    axios({
+            //   method: "post",
+            //   url: "myurl",
+            //   data: formData,
+            //   headers: {
+            //       'Content-Type':  `multipart/form-data`,
+            // })
+
+            await axios.post(API_URL + "/user", user)
+                .then((d) => {
+                    setError(
+                        <Link to={`/verify/${d.data.id}`} className="hover:text-gray-200">
+                            {d.data.msg} Click here to verify OTP
+                        </Link>
+                    );
+
+                    // setError(<Link to="/login" className="hover:text-gray-200">{d.data.msg } Click here to login</Link>  )
+
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
             // e.target.reset();
             // 
         }
@@ -62,6 +67,7 @@ export default function RegistrationForm() {
                     type="text"
                     placeholder="Name"
                     ref={name}
+                    value={'mk'}
                     required
                 />
                 <input
@@ -69,6 +75,7 @@ export default function RegistrationForm() {
                     type="email"
                     placeholder="Email"
                     ref={email}
+                    value={'manthanpatel7958@gmail.com'}
                     required
                 />
                 <input
@@ -76,6 +83,7 @@ export default function RegistrationForm() {
                     type="text"
                     placeholder="Contact"
                     ref={contact}
+                    value={'1212121212'}
                     required
                 />
                 <input
@@ -83,6 +91,7 @@ export default function RegistrationForm() {
                     type="password"
                     placeholder="Password"
                     ref={password}
+                    value={'000000'}
                     required
                 />
                 <input
@@ -90,12 +99,14 @@ export default function RegistrationForm() {
                     type="password"
                     placeholder="Confirm Password"
                     ref={confirmPassword}
+                    value={'000000'}
                     required
                 />
                 <textarea
                     className="w-full p-2 border rounded"
                     placeholder="Address"
                     ref={address}
+                    value={'gjhghnjg'}
                     required
                 />
                 <button

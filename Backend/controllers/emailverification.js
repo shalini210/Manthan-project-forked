@@ -2,14 +2,14 @@ const nodemailer = require("nodemailer")
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
-    secure: true, 
+    secure: true,
     auth: {
         user: "manthanp1739@gmail.com",
         pass: "nkrw ykle ueah yzpm",
     },
 });
 const sendVerificationEmail = async (email, id, otp) => {
-    const link = `http://localhost:8081/user/verify/${id}`; 
+    const link = `http://localhost:5173/verify/${id}`;
 
     const htmlContent = `
         <h3>Email Verification</h3>
