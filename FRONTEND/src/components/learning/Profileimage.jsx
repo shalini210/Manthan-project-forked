@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { API_URL } from '../../Config';
-import { loginuserMain } from '../../slices/Userslice';
+import { changeprofilepic, loginuserMain } from '../../slices/Userslice';
 
 export default function Profileimage() {
     const imageref = useRef();
@@ -18,9 +18,10 @@ export default function Profileimage() {
         await axios.post(API_URL + "/user/setimage", data, { headers: { "Content-Type": "multipart/form-data" } })
             .then((d) => {
                 setmessage("Image Saved")
-                  dispatch(loginuserMain(d.data.data))
-                iref.current.src =API_URL+ d.data.data.profilepic
-                console.log(API_URL+ d.data.data.profilepic)
+                console.log(d)
+                  dispatch(changeprofilepic(d.data.data.profilepic))
+                iref.current.src =API_URL+""+d.data.data.profilepic
+                console.log(API_URL+""+ d.data.data.profilepic)
             })
             .catch((err) => {
                 console.log(err)

@@ -70,22 +70,51 @@ exports.UpdateUserQuestion = async (id, obj) => {
     return data;
 };
 
-exports.getDistinctCategories = async () => {
-    let result = { msg: "", data: [] };
-    try {
-        const categories = await userquestionModel.distinct("category");
-        result.msg = "category shown";
-        result.data = categories;
-    } catch (error) {
-        console.error("Error fetching categories:", error);
-        result.msg = "error";
-    }
-    return result;
+exports.getDistinctCategoriesWithCount = async () => {
+    return await userquestionModel.aggregate([
+        { $group: { _id: "$category", count: { $sum: 1 } } },
+        { $sort: { _id: 1 } }
+    ]); // this returns [{ _id: "Career", count: 5 }, ...]
 };
+
 
 exports.getQuestionsByCategory = async (category) => {
     let data = {};
-    await userquestionModel.find({ category })
+    // await userquestionModel.find({ category })
+
+
+    await userquestionModel.aggregate([
+        { $match: { "category": category } },
+        {
+            $addFields: {
+                userObjectId: { $toObjectId: "$user_id" }
+            }
+        },
+        {
+            $lookup: {
+                from: "users",                // collection name in MongoDB (lowercase plural of model name)
+                localField: "userObjectId",
+                foreignField: "_id",
+                as: "user_data"
+            }
+        },
+        {
+            $unwind: "$user_data"
+        },
+        {
+            $project: {
+                _id: 1,
+                questiontitle: 1,
+                question: 1,
+                postdate: 1,
+                category: 1,
+                user_id: "$user_data._id",
+                user_name: "$user_data.name",
+                email: "$user_data.email",
+                profilepic: "$user_data.profilepic"
+            }
+        }
+    ])
         .then((d) => {
             data.msg = "questions found"
             data.data = d
@@ -94,5 +123,7 @@ exports.getQuestionsByCategory = async (category) => {
             console.error("Error fetching questions by category:", err);
         })
     return data;
+
+
 };
 

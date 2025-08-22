@@ -27,6 +27,12 @@ router.get("/", async (req, res) => {
     res.send(data)
 })
 
+router.get("/:id", async (req, res) => {
+    let obj = req.params.id
+    let user = await userController.getUser(obj);
+    res.send(user);
+});
+
 router.post("/", async (req, res) => {
     let obj = { name: req.body.name, address: req.body.address, email: req.body.email, password: req.body.password, contact: req.body.contact }
     let d = await userController.Inseruser(obj)
@@ -40,16 +46,16 @@ router.get("/:email", async (req, res) => {
     res.send(data)
 })
 
-router.get("/verify/:id", async (req, res) => {
-    let id = req.params.id
-    res.send(`
-        <form action="/user/verify/${id}" method="POST">
-            <h2>Enter your OTP</h2>
-            <input type="number" name="otp" placeholder="Enter OTP" required />
-            <button type="submit">Verify</button>
-        </form>
-    `);
-})
+// router.get("/verify/:id", async (req, res) => {
+//     let id = req.params.id
+//     res.send(`
+//         <form action="/user/verify/${id}" method="POST">
+//             <h2>Enter your OTP</h2>
+//             <input type="number" name="otp" placeholder="Enter OTP" required />
+//             <button type="submit">Verify</button>
+//         </form>
+//     `);
+// })
 
 router.post("/loginUser", async (req, res) => {
     let data = await userController.Loginuser({ email: req.body.email, password: req.body.password })
@@ -91,24 +97,27 @@ router.put("/changepwd", async (req, res) => {
 })
 
 router.post("/verify/:id", async (req, res) => {
-    let id = req.params.id;
-    let enteredOTP = req.body.otp
-    let user = await UserModel.findById(id)
+    let id = req.params.id;  
+    let enteredOTP = req.body.otp; 
+
+    let user = await UserModel.findById(id);
 
     console.log("Entered OTP:", enteredOTP);
     console.log("Saved OTP:", user?.otp);
 
     if (!user) {
-        res.send("user not found")
+        return res.send({ msg: "❌ User not found" });
     }
+
     if (user.otp == enteredOTP) {
         user.verification = true;
         await user.save();
-        res.send("✅ Email verified successfully!");
+        res.send({ msg: "✅ Email verified successfully!" });
     } else {
-        res.send("❌ Incorrect OTP. Please try again.");
+        res.send({ msg: "❌ Incorrect OTP. Please try again." });
     }
-})
+});
+
 
 router.put("/updateuser/:id", async (req, res) => {
     let id = req.params.id

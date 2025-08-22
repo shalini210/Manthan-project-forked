@@ -17,10 +17,14 @@ export const userSlice = createSlice({
         logoutuserMain: (state) => {
             state.userdata = {}
             state.userislogin = false
+        },
+        changeprofilepic:(state,payload)=>
+        {
+            state.userdata.profilepic = payload.payload
         }
 
     }
 
 })
-export const { loginuserMain, logoutuserMain } = userSlice.actions;
+export const { loginuserMain, logoutuserMain,changeprofilepic } = userSlice.actions;
 export default userSlice.reducer

@@ -54,6 +54,7 @@ export default function UserLogin() {
                         <input
                             type="text"
                             ref={emailref}
+                            value={"shalini.rathore210@gmail.com"}
                             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                             placeholder="Enter your Email"
                         />
@@ -63,6 +64,7 @@ export default function UserLogin() {
                         <input
                             type="password"
                             ref={passref}
+                            value={"123456"}
                             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                             placeholder="Enter your password"
                         />

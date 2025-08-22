@@ -24,6 +24,9 @@ import AllQuestions from './components/learning/AllQuestions'
 import Questions_Details from './components/learning/Questions_Details'
 import CategorySection from './components/learning/CategorySection'
 import Profile from './components/learning/Profile'
+import ShowProfile from './components/learning/ShowProfile'
+import Showuserprofile from './components/learning/Showuserprofile'
+import VerifyOTP from './components/learning/VerifyOTP'
 //"quill/dist/quill.core.css"
 function App() {
   let username = "";
@@ -35,6 +38,9 @@ function App() {
     <>
       <Navbar></Navbar>
       <Routes>
+        <Route path='/verify/:id' element={<VerifyOTP />} />
+        <Route path='/showuserprofile/:id' element={<Showuserprofile></Showuserprofile>} />
+        <Route path='/showprofile' element={<ShowProfile></ShowProfile>} />
         <Route path='/distinct-categories' element={<CategorySection></CategorySection>} />
         <Route path='/Questions_details/:id' element={<Questions_Details></Questions_Details>} />
         <Route path='/allquestions' element={<AllQuestions></AllQuestions>} />
@@ -48,7 +54,7 @@ function App() {
         <Route path='/changepassword' element={<ChangePassword></ChangePassword>} />
         <Route path='/forgotpassword' element={<Forgetpassword></Forgetpassword>} />
         <Route path='/resetpassword/:id' element={<Resetpassword></Resetpassword>} />
-        <Route path='//profilesetting' element={<Profile></Profile>} />
+        <Route path='/profilesetting' element={<Profile></Profile>} />
       </Routes>
       {/* {(userislogin) ? <UserHome></UserHome> : <UserLogin></UserLogin>} */}
     </>

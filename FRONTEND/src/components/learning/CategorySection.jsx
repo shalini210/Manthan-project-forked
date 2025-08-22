@@ -8,7 +8,7 @@ export default function CategorySection({ onCategoryClick }) {
     useEffect(() => {
         axios.get(`${API_URL}/userquestion/distinct-categories`)
             .then((res) => {
-                setCategories(res.data.data);
+                setCategories(res.data.data); // array of { _id, count }
             })
             .catch((err) => {
                 console.error("Error loading categories", err);
@@ -22,10 +22,10 @@ export default function CategorySection({ onCategoryClick }) {
                 {categories.map((cat, index) => (
                     <li
                         key={index}
-                        className="text-blue-600 hover:underline cursor-pointer"
-                        onClick={() => onCategoryClick(cat)}
+                        className="text-blue-600 hover:underline cursor-pointer uppercase"
+                        onClick={() => onCategoryClick(cat._id)} // pass the category name
                     >
-                        {cat}
+                        {cat._id} ({cat.count})  {/* show count */}
                     </li>
                 ))}
             </ul>
