@@ -13,7 +13,7 @@ export default function VerifyOTP() {
     try {
       const d = await axios.post(API_URL + `/user/verify/${id}`, { otp });
       setMsg(d.data.msg);
-      setError(<Link to="/login" className="hover:text-gray-200">Click here to login</Link>)
+      setError(<Link to="/login" className="hover:text-gray-200">Click here to Login</Link>)
     } catch (err) {
       setMsg("Verification failed");
     }
